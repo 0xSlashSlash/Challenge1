@@ -1,4 +1,5 @@
 # coding: utf-8
+from cgi import print_exception
 import csv
 from pathlib import Path
 
@@ -18,16 +19,20 @@ loan_costs = [500, 600, 200, 1000, 450]
 # @TODO: Use the `len` function to calculate the total number of loans in the list.
 # Print the number of loans from the list
 # YOUR CODE HERE!
-
+number_of_loans = len(loan_costs)
+print(number_of_loans)
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
 # YOUR CODE HERE!
-
+Total_sum_of_loans = sum(loan_costs)
+print(Total_sum_of_loans)
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
 # YOUR CODE HERE!
+Average_loan_price = Total_sum_of_loans/number_of_loans
+print(Average_loan_price)
 
 """Part 2: Analyze Loan Data.
 
@@ -63,7 +68,10 @@ loan = {
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
 # YOUR CODE HERE!
-
+FV = loan.get("future_value")
+RM = loan.get("remaining_months")
+print(Future_Value)
+print(Remaining_months)
 
 # @TODO: Use the formula for Present Value to calculate a "fair value" of the loan.
 # Use a minimum required return of 20% as the discount rate.
@@ -71,13 +79,20 @@ loan = {
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
 
 # YOUR CODE HERE!
-
+#DR here stands in as a variable for discount rate, I am assuming it would have been pulled similarly to the other variables
+DR = .2
+PV = FV/(((DR/12)+1)**RM)
+print(PV)
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
 # YOUR CODE HERE!
-
+LP = loan.get("loan_price")
+if PV>=LP:
+    print("This loan is worth at least the cost to purchase it!")
+else:
+    print("This loan is too expensive!")
 
 """Part 3: Perform Financial Calculations.
 
